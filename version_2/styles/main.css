@@ -1,0 +1,172 @@
+/* Main App Background - Animated Gradient */
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Sidebar Styling - Glassmorphism */
+[data-testid="stSidebar"] {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Glassmorphism for Main Content Area */
+.main .block-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
+}
+
+/* Custom Card-like style for results and components */
+[data-testid="stMetricValue"] {
+    color: #fff !important;
+}
+
+/* Improve button appearance */
+div.stButton>button {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white !important;
+    border-radius: 14px;
+    padding: 12px 28px;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+div.stButton>button:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Input field glow */
+div.stTextInput>div>div>input {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 12px !important;
+    color: #000000 !important;
+    backdrop-filter: blur(10px);
+}
+
+div.stTextInput>div>div>input::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+div.stTextInput>div>div>input:focus {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Text readability improvements */
+h1,
+h2,
+h3,
+p,
+span,
+label {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Box / Alert Styling */
+[data-testid="stNotification"] {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 12px !important;
+    color: white !important;
+}
+
+[data-testid="stNotification"] p {
+    color: white !important;
+}
+
+/* Expander styling */
+.streamlit-expanderHeader {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    margin-bottom: 5px !important;
+    transition: all 0.3s ease !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.streamlit-expanderContent {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-top: none !important;
+    border-radius: 0 0 12px 12px !important;
+    color: white !important;
+}
+
+/* Divider color */
+hr {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Search Bar Area */
+div[data-testid="stHorizontalBlock"]:has(div.stTextInput) {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar Divider */
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] hr {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Titles */
+h1,
+h2,
+h3 {
+    background: linear-gradient(to right, #ffffff, #e0e0e0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800 !important;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
