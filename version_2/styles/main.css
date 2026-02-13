@@ -1,172 +1,168 @@
-/* Main App Background - Animated Gradient */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+/* Main App Background - Sophisticated 5-Color Smooth Transition */
 [data-testid="stAppViewContainer"] {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    background-image: none !important;
+    animation: smooth-bg-cycle 40s ease-in-out infinite !important;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
+@keyframes smooth-bg-cycle {
 
-    50% {
-        background-position: 100% 50%;
-    }
-
+    0%,
     100% {
-        background-position: 0% 50%;
+        background-color: #ffffff;
     }
+
+    20% {
+        background-color: #ff8c00;
+    }
+
+    40% {
+        background-color: #c1a3d6;
+    }
+
+    /* Dark Purple */
+    60% {
+        background-color: #d15d85;
+    }
+
+    /* Muted Pink */
+    80% {
+        background-color: #2e5a88;
+    }
+
+    /* Deep Muted Blue */
 }
 
-/* Sidebar Styling - Glassmorphism */
+/* Ensure other sub-containers don't block the background */
+.stApp {
+    background-color: transparent !important;
+}
+
+/* Sidebar Styling - Clean and Minimalist */
 [data-testid="stSidebar"] {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(254, 251, 246, 0.95) !important;
+    /* Elegant Creamy White */
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Glassmorphism for Main Content Area */
+/* Central Content Container - High-End Boutique Look */
 .main .block-container {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2.5rem;
-    margin-top: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease;
+    background: #ffffff !important;
+    border-radius: 0px !important;
+    padding: 5rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.1) !important;
+    max-width: 1100px !important;
 }
 
-/* Custom Card-like style for results and components */
-[data-testid="stMetricValue"] {
-    color: #fff !important;
-}
-
-/* Improve button appearance */
-div.stButton>button {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white !important;
-    border-radius: 14px;
-    padding: 12px 28px;
-    font-weight: 600;
-    backdrop-filter: blur(5px);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-div.stButton>button:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Input field glow */
-div.stTextInput>div>div>input {
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    border-radius: 12px !important;
+/* Luxury Typography - Selective targeting to avoid breaking icons */
+h1 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 700 !important;
+    font-size: 4rem !important;
+    letter-spacing: -1px !important;
     color: #000000 !important;
-    backdrop-filter: blur(10px);
+    text-transform: uppercase;
+    margin-bottom: 2rem !important;
 }
 
-div.stTextInput>div>div>input::placeholder {
-    color: rgba(0, 0, 0, 0.5) !important;
+h2,
+h3,
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 600 !important;
+    color: #000000 !important;
+}
+
+/* General Text - Careful with spans to preserve icons */
+p,
+li,
+.stMarkdown p,
+.stMarkdown li,
+div[data-testid="stText"] {
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a !important;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+}
+
+/* Fix for overlapping text in expanders/widgets - Avoid generic tag overrides */
+.streamlit-expanderHeader p {
+    font-family: 'Inter', sans-serif !important;
+    margin: 0 !important;
+}
+
+.stSelectbox label,
+.stSlider label {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.5px;
+}
+
+/* Input Fields - Clean and Bare */
+div.stTextInput>div>div>input {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid #d1d1d1 !important;
+    border-radius: 0px !important;
+    padding: 0.8rem 0 !important;
+    font-size: 1.1rem !important;
+    color: #000000 !important;
+    transition: border-color 0.3s ease;
 }
 
 div.stTextInput>div>div>input:focus {
-    border-color: rgba(255, 255, 255, 0.6) !important;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2) !important;
+    border-bottom: 1px solid #000000 !important;
+    box-shadow: none !important;
 }
 
-/* Text readability improvements */
-h1,
-h2,
-h3,
-p,
-span,
-label {
-    color: white !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Info Box / Alert Styling */
-[data-testid="stNotification"] {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 12px !important;
-    color: white !important;
-}
-
-[data-testid="stNotification"] p {
-    color: white !important;
-}
-
-/* Expander styling */
-.streamlit-expanderHeader {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px !important;
-    margin-bottom: 5px !important;
+/* Button - Minimalist Black (Luxury Style) */
+div.stButton>button {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #000000 !important;
+    border-radius: 0px !important;
+    padding: 12px 40px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase;
     transition: all 0.3s ease !important;
 }
 
-.streamlit-expanderHeader:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
+div.stButton>button:hover {
+    background-color: transparent !important;
+    color: #000000 !important;
 }
 
-.streamlit-expanderContent {
-    background-color: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-top: none !important;
-    border-radius: 0 0 12px 12px !important;
-    color: white !important;
+/* Tabs - Clean underline style */
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Divider color */
+/* Divider colors */
 hr {
-    border-color: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Search Bar Area */
-div[data-testid="stHorizontalBlock"]:has(div.stTextInput) {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+/* Success/Info messages - Cleaned up */
+div[data-testid="stNotification"] {
+    border-radius: 0px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    background-color: #f9f9f9 !important;
 }
 
-/* Sidebar Divider */
-[data-testid="stSidebar"] [data-testid="stVerticalBlock"] hr {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Titles */
-h1,
-h2,
-h3 {
-    background: linear-gradient(to right, #ffffff, #e0e0e0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800 !important;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+/* Fix image overlap issue in some versions */
+[data-testid="stImage"] {
+    margin-bottom: 1.5rem;
 }

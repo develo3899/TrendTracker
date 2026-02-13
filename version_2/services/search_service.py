@@ -120,3 +120,12 @@ def search_news(keyword: str, num_results: int = 5) -> List[NewsArticle]:
     if _search_service is None:
         _search_service = SearchService()
     return _search_service.search_news(keyword, num_results)
+
+def get_google_trends_url(keyword: str) -> str:
+    """
+    Google Trends 탐색 페이지 URL을 생성합니다.
+    """
+    import urllib.parse
+    encoded_keyword = urllib.parse.quote(keyword)
+    # 한국 지역(geo=KR), 최근 7일(date=now 7-d) 기준 탐색 URL
+    return f"https://trends.google.com/trends/explore?q={encoded_keyword}&geo=KR&date=now%207-d"

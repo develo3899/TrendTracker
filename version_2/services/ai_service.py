@@ -71,6 +71,30 @@ class AIService:
             else:
                 raise AppError("ai_error")
 
+    def get_ai_insights(self, keyword: str) -> str:
+        """
+        특정 키워드에 대해 Gemini의 자체 지식을 바탕으로 깊이 있는 트렌드 분석을 수행합니다.
+        """
+        prompt = f"""
+전문가적인 시각에서 '{keyword}'에 대한 현재 트렌드와 미래 전망을 분석해주세요.
+다음 구조로 한국어로 답변해주세요:
+1. 🌟 현재 위상: 이 키워드가 현재 시장이나 사회에서 어떤 위치에 있는지
+2. 💡 핵심 동력: 이 트렌드를 이끄는 주요 요인들
+3. 🚀 미래 전망: 향후 1~2년 내의 발전 방향
+4. ⚠️ 주의점: 관련하여 주목해야 할 리스크나 한계점
+
+답변은 친절하고 전문적인 톤으로 작성해주세요.
+""".strip()
+
+        try:
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=prompt
+            )
+            return response.text if response and response.text else "인사이트를 생성할 수 없습니다."
+        except Exception as e:
+            return f"AI 인사이트 로드 중 오류 발생: {str(e)}"
+
 # 싱글톤 인스턴스 전역 변수
 _ai_service = None
 
@@ -83,3 +107,13 @@ def summarize_news(articles: List[NewsArticle]) -> str:
     if _ai_service is None:
         _ai_service = AIService()
     return _ai_service.summarize_news(articles)
+
+def get_ai_insights(keyword: str) -> str:
+    """
+    편의를 위한 AIService 래퍼 함수입니다.
+    Gemini의 자체 지식으로 트렌드 분석을 수행합니다.
+    """
+    global _ai_service
+    if _ai_service is None:
+        _ai_service = AIService()
+    return _ai_service.get_ai_insights(keyword)

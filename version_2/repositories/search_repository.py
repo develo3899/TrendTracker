@@ -16,7 +16,7 @@ class SearchRepository:
         self.csv_path = csv_path
         self.columns = [
             "search_key", "search_time", "keyword", "article_index",
-            "title", "url", "snippet", "ai_summary"
+            "title", "url", "snippet", "ai_summary", "ai_insights", "trends_url"
         ]
         # data/ 폴더가 없으면 자동 생성
         directory = os.path.dirname(csv_path)
@@ -30,7 +30,6 @@ class SearchRepository:
         
         try:
             df = pd.read_csv(self.csv_path)
-            # 저장된 데이터가 없는 경우 컬럼 보장
             if df.empty:
                 return pd.DataFrame(columns=self.columns)
             return df
@@ -44,7 +43,6 @@ class SearchRepository:
             new_df = search_result.to_dataframe()
             
             if os.path.exists(self.csv_path):
-                # 기존 데이터에 append
                 existing_df = pd.read_csv(self.csv_path)
                 final_df = pd.concat([existing_df, new_df], ignore_index=True)
             else:
@@ -62,8 +60,6 @@ class SearchRepository:
         if df.empty:
             return []
         
-        # search_time 기준으로 정렬 후 고유값 추출
-        # (문자열 비교여도 'yyyyMMddHHmm' 형식이면 정렬 가능)
         df_sorted = df.sort_values(by="search_time", ascending=False)
         keys = df_sorted["search_key"].unique().tolist()
         return keys
@@ -81,33 +77,39 @@ class SearchRepository:
         # 첫 번째 행에서 기본 정보 추출
         first_row = result_df.iloc[0]
         
-        # 날짜 포맷 변환 (저장된 형식에 따라 처리)
+        # 안전한 가져오기 (이전 버전 CSV 호환성)
+        ai_insights = str(first_row.get("ai_insights", ""))
+        trends_url = str(first_row.get("trends_url", ""))
+        
+        # 날짜 포맷 변환
         search_time_val = first_row["search_time"]
         if isinstance(search_time_val, str):
             try:
-                # pandas가 자동 변환해줬을 수도 있고 문자열일 수도 있음
                 search_time = pd.to_datetime(search_time_val).to_pydatetime()
             except:
-                search_time = datetime.now() # fallback
+                search_time = datetime.now()
         else:
             search_time = search_time_val
 
-        # 기사 리스트 복구
+        # 기사 리스트 복구 (article_index가 0인 것은 기사가 없는 placeholder)
         articles = []
         for _, row in result_df.sort_values("article_index").iterrows():
-            articles.append(NewsArticle(
-                title=str(row["title"]),
-                url=str(row["url"]),
-                snippet=str(row["snippet"]),
-                pub_date="" # CSV 스펙에 없으므로 빈 문자열로 처리
-            ))
+            if row["article_index"] > 0:
+                articles.append(NewsArticle(
+                    title=str(row["title"]),
+                    url=str(row["url"]),
+                    snippet=str(row["snippet"]),
+                    pub_date=""
+                ))
             
         return SearchResult(
             search_key=str(first_row["search_key"]),
             search_time=search_time,
             keyword=str(first_row["keyword"]),
             articles=articles,
-            ai_summary=str(first_row["ai_summary"])
+            ai_summary=str(first_row["ai_summary"]),
+            ai_insights=ai_insights,
+            trends_url=trends_url
         )
 
     def get_all_as_csv(self) -> str:

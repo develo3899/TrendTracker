@@ -5,12 +5,11 @@ from datetime import datetime
 def render_sidebar_header():
     """애플리케이션 이름과 간단한 소개를 사이드바 최상단에 표시합니다."""
     st.sidebar.markdown("""
-        <div style="padding-bottom: 20px;">
-            <h1 style="font-size: 1.8rem; margin-bottom: 0;">🔍 Trend Tracker</h1>
-            <p style="font-size: 0.9rem; opacity: 0.7;">AI 실시간 뉴스 분석기</p>
+        <div style="padding-bottom: 30px; border-bottom: 1px solid #000; margin-bottom: 20px;">
+            <p style="letter-spacing: 2px; font-size: 0.7rem; color: #666; margin-bottom: 0.2rem; text-transform: uppercase;">Real-time Hub</p>
+            <h1 style="font-size: 1.4rem; margin-bottom: 0; font-family: 'Cormorant Garamond', serif !important;">TREND TRACKER</h1>
         </div>
     """, unsafe_allow_html=True)
-    st.sidebar.divider()
 
 def render_settings() -> int:
     """
